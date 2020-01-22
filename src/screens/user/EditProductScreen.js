@@ -153,6 +153,7 @@ const EditProductScreen = props => {
                         errorText="Please enter a valid description!"
                         keyboardType="default"
                         autoCapitalize="sentences"
+                        returnKeyType="next"
                         autoCorrect
                         multiline
                         numberOfLines={3}

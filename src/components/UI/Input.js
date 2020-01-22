@@ -27,7 +27,7 @@ const Input = props => {
     const [inputState, dispatch] = useReducer(inputReducer, {
         value: props.initialValue ? props.initialValue : '',
         isValid: props.initiallyValid,
-        touched: true,
+        touched: false,
     });
 
     const {onInputChange, id} = props;
@@ -72,7 +72,9 @@ const Input = props => {
                 style={styles.input}
                 value={inputState.value}
                 onChangeText={textChangeHandler}
-              /*  onBlur={lostFocusHandler}*/
+                /*  onBlur={lostFocusHandler}*/
+                onFocus={lostFocusHandler}
+                /*onEndEditing={lostFocusHandler}*/
             />
             {!inputState.isValid && inputState.touched && (
                 <View style={styles.errorContainer}>
