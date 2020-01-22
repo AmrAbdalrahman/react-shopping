@@ -1,5 +1,5 @@
 import React, {useReducer, useEffect} from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {View, Text, TextInput, StyleSheet, Keyboard} from 'react-native';
 
 const INPUT_CHANGE = 'INPUT_CHANGE';
 const INPUT_BLUR = 'INPUT_BLUR';
@@ -71,6 +71,7 @@ const Input = props => {
                 style={styles.input}
                 value={inputState.value}
                 onChangeText={textChangeHandler}
+                onSubmitEditing={Keyboard.dismiss}
                 /*  onBlur={lostFocusHandler}*/
                 onFocus={lostFocusHandler}
                 /*onEndEditing={lostFocusHandler}*/
