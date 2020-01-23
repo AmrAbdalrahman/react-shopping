@@ -8,7 +8,7 @@ import authReducer from './store/reducers/auth';
 /*import ShopNavigator from './navigation/ShopNavigator';*/
 import {composeWithDevTools} from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
-import NavigationContainer from "./navigation/NavigationContainer";
+import NavigationContainer from './navigation/NavigationContainer';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
@@ -16,12 +16,24 @@ const rootReducer = combineReducers({
     products: productsReducer,
     cart: cartReducer,
     orders: orderReducer,
-    auth: authReducer
+    auth: authReducer,
 });
 
-const store = createStore(rootReducer, composeEnhancers(
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
+/*const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(ReduxThunk),
 ));
+
+const configureStore = () => {
+  return createStore(
+    rootReducer,
+    applyMiddleware(thunk)
+    // composeEnhancers(applyMiddleware(thunk))
+  );
+};
+
+*/
 
 const App = () => {
     return (

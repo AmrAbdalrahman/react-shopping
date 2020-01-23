@@ -6,15 +6,14 @@ import {
     KeyboardAvoidingView,
     Button,
     ActivityIndicator,
-    Keyboard,
-    Alert
+    Alert,
 } from 'react-native';
 import Card from '../../components/UI/Card';
 import Input from '../../components/UI/Input';
 import Colors from '../../constants/Colors';
 import LinearGradient from 'react-native-linear-gradient';
 import * as authActions from '../../store/actions/auth';
-import {useDispatch} from "react-redux";
+import {useDispatch} from 'react-redux';
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
@@ -23,11 +22,11 @@ const formReducer = (state, action) => {
     if (action.type === FORM_INPUT_UPDATE) {
         const updatedValues = {
             ...state.inputValues,
-            [action.input]: action.value
+            [action.input]: action.value,
         };
         const updatedValidities = {
             ...state.inputValidities,
-            [action.input]: action.isValid
+            [action.input]: action.isValid,
         };
         let updatedFormIsValid = true;
         for (const key in updatedValidities) {
@@ -36,7 +35,7 @@ const formReducer = (state, action) => {
         return {
             formIsValid: updatedFormIsValid,
             inputValidities: updatedValidities,
-            inputValues: updatedValues
+            inputValues: updatedValues,
         };
     }
     return state;
@@ -52,13 +51,13 @@ const AuthScreen = props => {
     const [formState, dispatchFormState] = useReducer(formReducer, {
         inputValues: {
             email: '',
-            password: ''
+            password: '',
         },
         inputValidities: {
             email: false,
-            password: false
+            password: false,
         },
-        formIsValid: false
+        formIsValid: false,
     });
 
     useEffect(() => {
@@ -73,11 +72,11 @@ const AuthScreen = props => {
             action = dispatch(authActions.signup(
                 formState.inputValues.email,
                 formState.inputValues.password,
-            ))
+            ));
         } else {
             action = authActions.login(
                 formState.inputValues.email,
-                formState.inputValues.password
+                formState.inputValues.password,
             );
         }
         setError(null);
@@ -86,6 +85,7 @@ const AuthScreen = props => {
             await dispatch(action);
             props.navigation.navigate('Shop');
         } catch (err) {
+            console.log("show err",err);
             setError(err.message);
             setIsLoading(false);
         }
@@ -97,10 +97,10 @@ const AuthScreen = props => {
                 type: FORM_INPUT_UPDATE,
                 value: inputValue,
                 isValid: inputValidity,
-                input: inputIdentifier
+                input: inputIdentifier,
             });
         },
-        [dispatchFormState]
+        [dispatchFormState],
     );
 
     return (
@@ -110,7 +110,7 @@ const AuthScreen = props => {
             style={styles.screen}>
             <LinearGradient colors={['#ffedff', '#ffe3ff']} style={styles.gradient}>
                 <Card style={styles.authContainer}>
-                    <ScrollView>
+                    <ScrollView keyboardShouldPersistTaps={'always'}>
                         <Input id="email"
                                label="E-Mail"
                                keyboardType="email-address"

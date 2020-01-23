@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-community/async-storage';
 
 /*export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';*/
@@ -17,18 +17,20 @@ export const authenticate = (userId, token, expiryTime) => {
 
 export const signup = (email, password) => {
     return async dispatch => {
-        const response = fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC-yxmnubUBqKYnzTgp40_ZQYA3hyJG--M',
+        const response = await fetch(
+            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC-yxmnubUBqKYnzTgp40_ZQYA3hyJG--M',
             {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     email: email,
                     password: password,
-                    returnSecureToken: true
-                })
-            });
+                    returnSecureToken: true,
+                }),
+            },
+        );
 
         if (!response.ok) {
             const errorResData = await response.json();
@@ -41,17 +43,19 @@ export const signup = (email, password) => {
         }
 
         const resData = await response.json();
-        console.log(resData);
-        dispatch(authenticate(
-            resData.localId,
-            resData.idToken,
-            parseInt(resData.expiresIn) * 1000
-        ));
+        console.log('resData', resData);
+        dispatch(
+            authenticate(
+                resData.localId,
+                resData.idToken,
+                parseInt(resData.expiresIn) * 1000,
+            ),
+        );
         const expirationDate = new Date(
-            new Date().getTime() + parseInt(resData.expiresIn) * 1000
+            new Date().getTime() + parseInt(resData.expiresIn) * 1000,
         );
         saveDataToStorage(resData.idToken, resData.localId, expirationDate);
-    }
+    };
 };
 
 export const login = (email, password) => {
@@ -61,14 +65,14 @@ export const login = (email, password) => {
             {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     email: email,
                     password: password,
-                    returnSecureToken: true
-                })
-            }
+                    returnSecureToken: true,
+                }),
+            },
         );
 
         if (!response.ok) {
@@ -88,11 +92,11 @@ export const login = (email, password) => {
             authenticate(
                 resData.localId,
                 resData.idToken,
-                parseInt(resData.expiresIn) * 1000
-            )
+                parseInt(resData.expiresIn) * 1000,
+            ),
         );
         const expirationDate = new Date(
-            new Date().getTime() + parseInt(resData.expiresIn) * 1000
+            new Date().getTime() + parseInt(resData.expiresIn) * 1000,
         );
         saveDataToStorage(resData.idToken, resData.localId, expirationDate);
     };
@@ -126,7 +130,7 @@ const saveDataToStorage = (token, userId, expirationDate) => {
         JSON.stringify({
             token: token,
             userId: userId,
-            expiryDate: expirationDate.toISOString()
-        })
+            expiryDate: expirationDate.toISOString(),
+        }),
     );
 };
