@@ -67,12 +67,13 @@ const AuthScreen = props => {
     }, [error]);
 
     const authHandler = async () => {
+
         let action;
         if (isSignup) {
-            action = dispatch(authActions.signup(
+            action = authActions.signup(
                 formState.inputValues.email,
                 formState.inputValues.password,
-            ));
+            );
         } else {
             action = authActions.login(
                 formState.inputValues.email,
@@ -85,7 +86,7 @@ const AuthScreen = props => {
             await dispatch(action);
             props.navigation.navigate('Shop');
         } catch (err) {
-            console.log("show err",err);
+            console.log('show err', err);
             setError(err.message);
             setIsLoading(false);
         }
