@@ -7,6 +7,7 @@ import * as cartActions from '../../store/actions/cart';
 import * as productsActions from '../../store/actions/products';
 import HeaderButton from '../../components/UI/HeaderButton';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import analytics from '@react-native-firebase/analytics';
 
 const ProductsOverviewScreen = props => {
     const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +40,20 @@ const ProductsOverviewScreen = props => {
             setIsLoading(false);
         });
     }, [dispatch, loadProducts]);
+
+    /*start handle analytics section*/
+    async function trackScreenView(screen) {
+        // Set & override the MainActivity screen name
+        await analytics().setCurrentScreen(screen, screen);
+    }
+
+    // Track a screen view once the component has mounted
+    useEffect(() => {
+        trackScreenView('ProductsOverviewScreen');
+    }, []);
+
+    /*end handle analytics section*/
+
 
     const selectItemHandler = (id, title) => {
         props.navigation.navigate('ProductDetail', {
