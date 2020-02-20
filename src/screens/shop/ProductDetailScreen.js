@@ -3,12 +3,29 @@ import {View, Text, StyleSheet, ScrollView, Image, Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
 import * as cartActions from '../../store/actions/cart';
+import analytics from '@react-native-firebase/analytics';
 
 const ProductDetailScreen = props => {
 
     const productId = props.navigation.getParam('productId');
     const selectedProduct = useSelector(state => state.products.availableProducts.find(prod => prod.id === productId));
     const dispatch = useDispatch();
+
+    /*start handle analytics section*/
+    analytics().logEvent('product_view', {
+        id: productId,
+        title: selectedProduct.title,
+        price: selectedProduct.price,
+    });
+
+    analytics().logViewItem({
+        item_id: productId,
+        item_name: selectedProduct.title,
+        price: selectedProduct.price,
+    })
+    an
+    /*end handle analytics section*/
+
     return (
         <ScrollView>
             <Image style={styles.image} source={{uri: selectedProduct.imageUrl}}/>

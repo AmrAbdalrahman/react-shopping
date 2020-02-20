@@ -7,13 +7,14 @@ import * as cartActions from '../../store/actions/cart';
 import * as productsActions from '../../store/actions/products';
 import HeaderButton from '../../components/UI/HeaderButton';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import analytics from '@react-native-firebase/analytics';
+import {analytics} from '@react-native-firebase/analytics';
 
 const ProductsOverviewScreen = props => {
     const [isLoading, setIsLoading] = useState(false);
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [error, setError] = useState();
     const products = useSelector(state => state.products.availableProducts);
+    const currentUser = useSelector(state => state.auth);
     const dispatch = useDispatch();
 
     const loadProducts = useCallback(async () => {
@@ -43,6 +44,10 @@ const ProductsOverviewScreen = props => {
 
     /*start handle analytics section*/
     async function trackScreenView(screen) {
+        await Promise.all([
+            analytics().setUserId(currentUser.userId),
+            analytics().setUserProperty('static_account_balance', '100'),
+        ]);
         // Set & override the MainActivity screen name
         await analytics().setCurrentScreen(screen, screen);
     }

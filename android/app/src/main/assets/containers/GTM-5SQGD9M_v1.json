@@ -1,0 +1,57 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2020-02-20 08:24:36",
+    "containerVersion": {
+        "path": "accounts/6000600197/containers/30672630/versions/1",
+        "accountId": "6000600197",
+        "containerId": "30672630",
+        "containerVersionId": "1",
+        "name": "version 1.1",
+        "container": {
+            "path": "accounts/6000600197/containers/30672630",
+            "accountId": "6000600197",
+            "containerId": "30672630",
+            "name": "www.fekretyonline.com",
+            "publicId": "GTM-5SQGD9M",
+            "usageContext": [
+                "ANDROID_SDK_5"
+            ],
+            "fingerprint": "1582186926905",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/6000600197/containers/30672630/workspaces?apiLink=container"
+        },
+        "builtInVariable": [
+            {
+                "accountId": "6000600197",
+                "containerId": "30672630",
+                "type": "APP_ID",
+                "name": "App ID"
+            },
+            {
+                "accountId": "6000600197",
+                "containerId": "30672630",
+                "type": "APP_NAME",
+                "name": "App Name"
+            },
+            {
+                "accountId": "6000600197",
+                "containerId": "30672630",
+                "type": "APP_VERSION_CODE",
+                "name": "App Version Code"
+            },
+            {
+                "accountId": "6000600197",
+                "containerId": "30672630",
+                "type": "APP_VERSION_NAME",
+                "name": "App Version Name"
+            },
+            {
+                "accountId": "6000600197",
+                "containerId": "30672630",
+                "type": "EVENT_NAME",
+                "name": "Event Name"
+            }
+        ],
+        "fingerprint": "1582187010767",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6000600197/containers/30672630/versions/1?apiLink=version"
+    }
+}
