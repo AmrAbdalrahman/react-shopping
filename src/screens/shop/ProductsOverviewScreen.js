@@ -7,7 +7,7 @@ import * as cartActions from '../../store/actions/cart';
 import * as productsActions from '../../store/actions/products';
 import HeaderButton from '../../components/UI/HeaderButton';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import {analytics} from '@react-native-firebase/analytics';
+import analytics from '@react-native-firebase/analytics';
 
 const ProductsOverviewScreen = props => {
     const [isLoading, setIsLoading] = useState(false);

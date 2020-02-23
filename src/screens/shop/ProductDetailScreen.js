@@ -22,8 +22,8 @@ const ProductDetailScreen = props => {
         item_id: productId,
         item_name: selectedProduct.title,
         price: selectedProduct.price,
-    })
-    an
+        item_category: 'clothes',
+    });
     /*end handle analytics section*/
 
     return (
